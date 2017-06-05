@@ -4,7 +4,7 @@ Cordova Plugin for Android SharedPreferences
 ## Installation
 
 ```bash
-cordova plugin add cordova-plugin-shared-preferences --save
+cordova plugin add https://github.com/hassanShahzad/cordova-plugin-shared-preferences --save
 ```
 
 ## Usage

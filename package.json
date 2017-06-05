@@ -1,5 +1,5 @@
 {
-  "name": "cordova-plugin-shared-preferences-in-apps",
+  "name": "cordova-plugin-shared-preferences",
   "version": "0.0.1",
   "description": "Cordova plugin for Android's Native key value storage and sharing data between two apps.",
   "scripts": {

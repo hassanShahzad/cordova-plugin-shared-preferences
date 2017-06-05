@@ -8,7 +8,7 @@
     <license>MIT</license>
     <keywords>cordova,android,shared-preferences</keywords>
 
-    <js-module name="SharedPreferences" src="android/SharedPreferences.js">
+    <js-module name="SharedPreferences" src="src/android/SharedPreferences.js">
         <clobbers target="SharedPreferences" />
     </js-module>
 

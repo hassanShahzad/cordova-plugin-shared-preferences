@@ -17,7 +17,14 @@ public class SharedPreferencesPlugin extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if ("getSharedPreferences".equals(action)) {
             return getSharedPreferences(args, callbackContext);
-        } else if ("putString".equals(action)) {
+        }
+        else if ("sharedPreferencesWithOtherApp".equals(action)) {
+            return sharedPreferencesWithOtherApp(args, callbackContext);
+        }
+        else if ("getSharedPreferencesFromOtherApp".equals(action)) {
+            return getSharedPreferencesFromOtherApp(args, callbackContext);
+        }
+        else if ("putString".equals(action)) {
             return putStringPref(args, callbackContext);
         } else if ("getString".equals(action)) {
             return getStringPref(args, callbackContext);
@@ -164,7 +171,70 @@ public class SharedPreferencesPlugin extends CordovaPlugin {
             return false;
         }
     }
-
+    
+    private boolean sharedPreferencesWithOtherApp(JSONArray args, CallbackContext callbackContext) throws JSONException {
+        prefFile = args.getString(0);
+        String modeType = args.getString(1);
+        Context context = cordova.getActivity().getApplicationContext();
+        if ("MODE_APPEND".equals(modeType)) {
+            try {
+                sharedPref = context.getSharedPreferences(prefFile, Context.MODE_APPEND);
+            } catch (Exception e) {
+                callbackContext.error("Error creating Shared Preferences" + e.getMessage());
+                return false;
+            }
+            callbackContext.success("Shared Preferences Created");
+            return true;
+        } else if ("MODE_PRIVATE".equals(modeType)) {
+            try {
+                sharedPref = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
+            } catch (Exception e) {
+                callbackContext.error("Error creating Shared Preferences" + e.getMessage());
+                return false;
+            }
+            callbackContext.success("Shared Preferences Created");
+            return true;
+        } else {
+            callbackContext.error("Invalid Mode provided");
+            return false;
+        }
+    }
+    
+    private boolean getSharedPreferencesFromOtherApp(JSONArray args, CallbackContext callbackContext) throws JSONException {
+        prefFile = args.getString(0);
+        String modeType = args.getString(1);
+        String packageIdentifierOfOtherApp = args.getString(2);
+        try {
+            Context context = cordova.getActivity().createPackageContext(packageIdentifierOfOtherApp, 0);
+            if ("MODE_APPEND".equals(modeType)) {
+                try {
+                    sharedPref = context.getSharedPreferences(prefFile, Context.MODE_APPEND);
+                } catch (Exception e) {
+                    callbackContext.error("Error creating Shared Preferences" + e.getMessage());
+                    return false;
+                }
+                callbackContext.success("Shared Preferences Created");
+                return true;
+            } else if ("MODE_PRIVATE".equals(modeType)) {
+                try {
+                    sharedPref = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
+                } catch (Exception e) {
+                    callbackContext.error("Error creating Shared Preferences" + e.getMessage());
+                    return false;
+                }
+                callbackContext.success("Shared Preferences Created");
+                return true;
+            } else {
+                callbackContext.error("Invalid Mode provided");
+                return false;
+            }
+            
+        }
+        catch (Exception e) {
+            callbackContext.error("Error creating Shared Preferences" + e.getMessage());
+            return false;
+        }
+    }
     private boolean putStringPref(JSONArray args, CallbackContext callbackContext) throws JSONException {
         Editor editor = sharedPref.edit();
         try {

@@ -3,7 +3,7 @@
     id="cordova-plugin-shared-preferences" version="0.0.1"
     xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>Cordova Plugin for Android SharedPreferences</name>
-    <description>Cordova plugin for Android's Native key value storage system.</description>
+    <description>Cordova plugin for Android's Native key value storage and sharing data between apps..</description>
     <author>Ratson</author>
     <license>MIT</license>
     <keywords>cordova,android,shared-preferences</keywords>

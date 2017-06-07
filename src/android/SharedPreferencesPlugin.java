@@ -1,4 +1,4 @@
-package name.ratson.cordova.plugin;
+package name.hassanShahzad.cordova.plugin;
 
 import android.content.Context;
 import android.content.SharedPreferences;

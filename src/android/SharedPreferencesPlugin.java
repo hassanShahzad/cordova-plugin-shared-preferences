@@ -205,7 +205,7 @@ public class SharedPreferencesPlugin extends CordovaPlugin {
         String modeType = args.getString(1);
         String packageIdentifierOfOtherApp = args.getString(2);
         try {
-            Context context = cordova.getActivity().createPackageContext(packageIdentifierOfOtherApp, 0);
+            Context context = cordova.createPackageContext(packageIdentifierOfOtherApp, 0);
             if ("MODE_APPEND".equals(modeType)) {
                 try {
                     sharedPref = context.getSharedPreferencesFromOtherApp(prefFile, Context.MODE_APPEND);

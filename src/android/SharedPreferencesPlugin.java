@@ -205,10 +205,10 @@ public class SharedPreferencesPlugin extends CordovaPlugin {
         String modeType = args.getString(1);
         String packageIdentifierOfOtherApp = args.getString(2);
         try {
-            Context context = cordova.createPackageContext(packageIdentifierOfOtherApp, 0);
+            Context context = cordova.getActivity().createPackageContext(packageIdentifierOfOtherApp, 0);
             if ("MODE_APPEND".equals(modeType)) {
                 try {
-                    sharedPref = context.getSharedPreferencesFromOtherApp(prefFile, Context.MODE_APPEND);
+                    sharedPref = context.getSharedPreferencesFromOtherApp(prefFile, Context.MODE_APPEND,packageIdentifierOfOtherApp);
                 } catch (Exception e) {
                     callbackContext.error("Error creating Shared Preferences" + e.getMessage());
                     return false;
@@ -217,7 +217,7 @@ public class SharedPreferencesPlugin extends CordovaPlugin {
                 return true;
             } else if ("MODE_PRIVATE".equals(modeType)) {
                 try {
-                    sharedPref = context.getSharedPreferencesFromOtherApp(prefFile, Context.MODE_PRIVATE);
+                    sharedPref = context.getSharedPreferencesFromOtherApp(prefFile, Context.MODE_PRIVATE,packageIdentifierOfOtherApp);
                 } catch (Exception e) {
                     callbackContext.error("Error creating Shared Preferences" + e.getMessage());
                     return false;

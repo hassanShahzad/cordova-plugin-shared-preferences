@@ -9,7 +9,7 @@ export function sharedPreferencesWithOtherApp(file, mode, successCallback, error
 }
 
 export function getSharedPreferencesFromOtherApp(file, mode, packageIdentifierOfOtherApp, successCallback, errorCallback) {
-  cordova.exec(successCallback, errorCallback, PLUGIN, 'getSharedPreferencesFromOtherApp', [file, mode]);
+  cordova.exec(successCallback, errorCallback, PLUGIN, 'getSharedPreferencesFromOtherApp', [file, mode, packageIdentifierOfOtherApp]);
 }
 
 export function putString(key, string, successCallback, errorCallback) {

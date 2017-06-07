@@ -178,7 +178,7 @@ public class SharedPreferencesPlugin extends CordovaPlugin {
         Context context = cordova.getActivity().getApplicationContext();
         if ("MODE_APPEND".equals(modeType)) {
             try {
-                sharedPref = context.sharedPreferencesWithOtherApp(prefFile, Context.MODE_APPEND);
+                sharedPref = context.getSharedPreferences(prefFile, Context.MODE_APPEND);
             } catch (Exception e) {
                 callbackContext.error("Error creating Shared Preferences" + e.getMessage());
                 return false;
@@ -187,7 +187,7 @@ public class SharedPreferencesPlugin extends CordovaPlugin {
             return true;
         } else if ("MODE_PRIVATE".equals(modeType)) {
             try {
-                sharedPref = context.sharedPreferencesWithOtherApp(prefFile, Context.MODE_PRIVATE);
+                sharedPref = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
             } catch (Exception e) {
                 callbackContext.error("Error creating Shared Preferences" + e.getMessage());
                 return false;
@@ -208,7 +208,7 @@ public class SharedPreferencesPlugin extends CordovaPlugin {
             Context context = cordova.getActivity().createPackageContext(packageIdentifierOfOtherApp, 0);
             if ("MODE_APPEND".equals(modeType)) {
                 try {
-                    sharedPref = context.getSharedPreferencesFromOtherApp(prefFile, Context.MODE_APPEND,packageIdentifierOfOtherApp);
+                    sharedPref = context.getSharedPreferences(prefFile, Context.MODE_APPEND);
                 } catch (Exception e) {
                     callbackContext.error("Error creating Shared Preferences" + e.getMessage());
                     return false;
@@ -217,7 +217,7 @@ public class SharedPreferencesPlugin extends CordovaPlugin {
                 return true;
             } else if ("MODE_PRIVATE".equals(modeType)) {
                 try {
-                    sharedPref = context.getSharedPreferencesFromOtherApp(prefFile, Context.MODE_PRIVATE,packageIdentifierOfOtherApp);
+                    sharedPref = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
                 } catch (Exception e) {
                     callbackContext.error("Error creating Shared Preferences" + e.getMessage());
                     return false;
